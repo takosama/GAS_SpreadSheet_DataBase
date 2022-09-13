@@ -83,7 +83,7 @@ class DB {
         this.log += "$Map\n" +
             "lines :\n\t" + this.data.length + "\n" +
             "labels :\n\t" + JSON.stringify(this.labels) + "\n" +
-            "db state :\n\t" + JSON.stringify(this.data).substring(0, 100) + "\n";
+            "db state :\n\t" + JSON.stringify(this.data).substring(0, 100) + "\n\n";
         return this;
     }
 
@@ -92,6 +92,7 @@ class DB {
         for (let i = 0; i < this.data.length; i++) {
             rtn += this.data[i].join("\t") + "\n";
         }
+        this.log += "$View\n\n";
         return rtn;
     }
 
