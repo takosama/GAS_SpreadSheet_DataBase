@@ -1,0 +1,2 @@
+# GAS_SpreadSheet_DataBase
+GAS中でSpreadSheetをDBとして扱えるTypeScriptのライブラリです
