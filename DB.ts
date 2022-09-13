@@ -1,11 +1,15 @@
 class SpreadSheetDB {
-  book = SpreadsheetApp.getActiveSpreadsheet();
-  sheet: GoogleAppsScript.Spreadsheet.Sheet | null = null;
+  private book = SpreadsheetApp.getActiveSpreadsheet();
+  private sheet: GoogleAppsScript.Spreadsheet.Sheet | null = null;
   private data: any[][] = [];
   private labels: string[] = [];
-  id: number = -1;
-  log: string = "";
-  name: string = "";
+  private id: number = -1;
+  private log: string = "";
+  private name: string = "";
+
+  GetLog(): string {
+    return this.log;
+  }
 
   Connect(name: string): boolean {
     this.sheet = this.book.getSheetByName(name);
