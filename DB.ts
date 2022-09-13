@@ -15,15 +15,10 @@ class SpreadSheetDB {
     this.sheet = this.book.getSheetByName(name);
     this.name = name;
     if (this.sheet == null) return false;
-    this.labels = this.sheet
-      ?.getRange(2, 1, 1, this.sheet.getLastColumn())
-      .getValues()[0];
+    this.labels = this.sheet?.getRange(2, 1, 1, this.sheet.getLastColumn()).getValues()[0];
 
     if (this.sheet.getLastRow() - 2 <= 0) this.data = [];
-    else
-      this.data = this.sheet
-        .getRange(3, 1, this.sheet.getLastRow() - 2, this.sheet.getLastColumn())
-        .getValues();
+    else this.data = this.sheet.getRange(3, 1, this.sheet.getLastRow() - 2, this.sheet.getLastColumn()).getValues();
 
     this.id = Number(this.sheet?.getRange(1, 1).getValue());
 
@@ -47,23 +42,12 @@ class SpreadSheetDB {
       insstr += key + ":" + value + " ";
     }
 
-    this.log +=
-      "$Result" +
-      "\n" +
-      "lines\t" +
-      rtn.length +
-      "\n" +
-      "result\t" +
-      insstr.substring(0, 20) +
-      "\n";
+    this.log += "$Result" + "\n" + "lines\t" + rtn.length + "\n" + "result\t" + insstr.substring(0, 20) + "\n";
     return rtn;
   }
 
   Map(
-    func: (
-      dic: { [label: string]: any },
-      id: string
-    ) => { [label: string]: any },
+    func: (dic: { [label: string]: any }, id: string) => { [label: string]: any },
     labels: (labels: string[]) => string[]
   ): this {
     let str = "";
@@ -150,9 +134,7 @@ class SpreadSheetDB {
     this.sheet?.getRange(1, 1).setValue(this.id);
     this.sheet?.appendRow(this.labels.map((x) => x));
 
-    this.sheet
-      ?.getRange(3, 1, this.data.length, this.labels.length)
-      .setValues(this.data.map((x) => x.map((y) => y)));
+    this.sheet?.getRange(3, 1, this.data.length, this.labels.length).setValues(this.data.map((x) => x.map((y) => y)));
 
     this.log += "$Save\t" + this.name + "\n";
     "lines\t" + this.data.length + "\n";
@@ -194,7 +176,6 @@ class SpreadSheetDB {
     this.sheet.getRange(2, 1).setValue("id");
     this.sheet.getRange(2, 2, 1, labels.length).setValues([labels]);
 
-    this.log +=
-      "$Create\t" + name + "\n" + "labels\t" + JSON.stringify(labels) + "";
+    this.log += "$Create\t" + name + "\n" + "labels\t" + JSON.stringify(labels) + "";
   }
 }
